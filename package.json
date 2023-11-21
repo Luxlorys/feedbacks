@@ -7,12 +7,17 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "concurrently \"cd front && npm run dev\" \"cd back && node app.js\""
+    "dev": "concurrently \"cd front && npm run dev\" \"cd back && node app.js\"",
+    "install-server": "cd back && npm install",
+    "start-server": "cd back && node app.js",
+    "build-clinet": "cd front && npm install",
+    "start-client": "cd front && npm run start"
   },
   "dependencies": {
     "concurrently": "^8.2.2"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1"
   }
 }

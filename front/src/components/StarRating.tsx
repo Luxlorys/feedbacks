@@ -8,7 +8,7 @@ interface StarRatingProps {
 }
 
 
-export function StarRating({ onStarChange }: StarRatingProps) {
+export function StarRating({ onStarChange}: StarRatingProps) {
 
   // @ts-ignore
   const [star, setStar] = useState(0);

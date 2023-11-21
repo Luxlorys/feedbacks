@@ -7,25 +7,27 @@ import {
   Input,
   Select,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 
 import { ChangeEvent, useState } from "react";
 import { StarRating } from "./StarRating";
-import { v4 as uuid } from "uuid";
 import { Feedback } from "../models/Feedback";
-import { SendFeedbackAlert } from "./SendFeedbackAlert";
 import { FeedbackApi } from "../services/api/feedbackApi";
 import { validateFields } from "../utils/validationUtil";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 interface FeedbackApiProps {
-  api: FeedbackApi
+  api: FeedbackApi;
 }
 
-export function FeedbackForm({api} : FeedbackApiProps) {
+export function FeedbackForm({ api }: FeedbackApiProps) {
   const [selectedBarista, setSelectedBarista] = useState<string>("");
   const [customBaristaName, setCustomBaristaName] = useState<string>("");
   const [selectedStar, setSelectedStar] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
+
+  const toast = useToast();
 
   const handleStarChange = (value: number) => {
     setSelectedStar(value);
@@ -46,32 +48,39 @@ export function FeedbackForm({api} : FeedbackApiProps) {
     setComment(value);
   };
 
+  const handleSubmit = async () => {
+    try {
+      if (
+        !validateFields(
+          selectedBarista,
+          customBaristaName,
+          selectedStar,
+          comment
+        )
+      ) {
+        toast({description: 'Заповніть всі поля'});
+        return;
+      }
 
-  const handleSubmit = () => {
-    if (!validateFields(selectedBarista, customBaristaName, selectedStar, comment)) {
-      // TODO: change to toast notify
-      alert('Заповніть всі поля для відправки відгуку')
-      return;
-    }
-    
-    // TODO: change Date format to +2 
-    const feedback: Feedback = {
-      barista:
-        selectedBarista === "Інший" ? customBaristaName : selectedBarista,
-      score: selectedStar,
-      comment: comment,
-    };
+      const feedback: Feedback = {
+        barista:
+          selectedBarista === "Інший" ? customBaristaName : selectedBarista,
+        score: selectedStar,
+        comment: comment,
+      };
 
+      await api.post(feedback);
 
-    api.post(feedback)
-      .then(() => {
-        // TODO: change alert window to toast notification library 
-        alert('Дякуємо за ваш відгук');
-        window.location.reload();
-      })
-      .catch(err => {
-        console.log(err);
+      toast({
+        title: 'Дякуємо за ваш відгук',
+        status: 'success',
+        onCloseComplete: () => {
+          window.location.reload();
+        },
       });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -83,8 +92,8 @@ export function FeedbackForm({api} : FeedbackApiProps) {
         isRequired={true}
         placeholder="Оберіть бариста"
       >
-        <option>Андрій</option>
-        <option>Марія</option>
+        <option>Андрій 🌻</option>
+        <option>Марія 🦊</option>
         <option>Інший</option>
       </Select>
 
@@ -111,9 +120,14 @@ export function FeedbackForm({api} : FeedbackApiProps) {
       />
 
       <Center mt={5}>
-        <SendFeedbackAlert onSubmit={handleSubmit} />
+        <Button
+          onClick={handleSubmit}
+          rightIcon={<ArrowForwardIcon />}
+          colorScheme="teal"
+          variant="outline">
+          Відправити відгук
+      </Button>
       </Center>
     </FormControl>
   );
 }
-

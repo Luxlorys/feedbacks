@@ -4,7 +4,7 @@ const router = express.Router();
 
 const feedbackController = new FeedbackController();
 
-router.get('/api/v1/feedbacks', async (req, res) => {
+router.get('/api/v1/get-feedbacks', async (req, res) => {
     try {
         const data = await feedbackController.getAllFeedbacks();
         res.json(data);
