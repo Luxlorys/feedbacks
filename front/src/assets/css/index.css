@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.right {
+    height: 50%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.left img {
+    width: 20%;
+    height: auto;
+}
+
+
+@media (max-width: 767px) {
+    .left img {
+      width: 50%; /* Set a smaller maximum width */
+    }
+  }
+
+.rating {
+    justify-content: center;
+    size: 200px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+
+}

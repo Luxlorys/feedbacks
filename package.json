@@ -1,0 +1,18 @@
+{
+  "name": "feedbacks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "concurrently \"cd front && npm run dev\" \"cd back && node app.js\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
