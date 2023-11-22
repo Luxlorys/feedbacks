@@ -16,13 +16,12 @@ app.use(bodyParser.json());
 // feedback router
 app.use(feedbackRoute);
 
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-
-    // connect to mongo db
-    main().catch(err => console.log(err));
-})
+// Connect to MongoDB
+main().then(() => {
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`);
+    });
+}).catch(err => console.error(err));
 
 
 async function main() {
