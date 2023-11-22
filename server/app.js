@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 
 // ------------- middleware -------------
 // permit to do cors requests
-app.use(cors({ origin: 'https://back-feedback-barista.onrender.com/' }));
+app.use(cors({ origin: 'https://fromt-feedback-barista.onrender.com/' }));
 
 app.use(bodyParser.json());
 
