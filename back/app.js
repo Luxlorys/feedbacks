@@ -19,11 +19,12 @@ app.use(feedbackRoute);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
+
+    // connect to mongo db
+    main().catch(err => console.log(err));
 })
 
 
-// connect to mongo db
-main().catch(err => console.log(err));
 async function main() {
     await mongoose.connect(process.env.MONGO_URI, {dbName: 'Feedbacks'});
     console.log('connected');

@@ -1,25 +1,30 @@
 const Feedback = require("../models/Feedback");
 
-class FeedbackController {
-    async getAllFeedbacks() {
-        try {
-            const data = await Feedback.find({});
-            return data;
-        } catch(error) {
-            console.error('Something went wrong', error);
-            throw error;
-        }
+const getAllFeedbacks = async (req, res) => {
+    try {
+        const data = await Feedback.find({});
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: 'Interval Server Error'})
     }
-    
-    async saveFeedback(feedback) {
-        try {
-            const data = await new Feedback(feedback);
-            return await data.save();
-        } catch (error) {
-            console.error('Internal Server Error', error);
-            throw error;
-        }
+};
+
+const saveFeedback = async (req, res) => {
+    try {
+        const data = await new Feedback(req.body);
+        const saveData = await data.save();
+        res.json(saveData)
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: 'Interval Server Error'})
     }
 }
 
-module.exports = FeedbackController;
+
+
+
+module.exports = {
+    get : getAllFeedbacks,
+    post : saveFeedback
+};
