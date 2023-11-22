@@ -8,7 +8,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && node app.js\"",
-    "install-server": "cd server && npm install",
+    "install-server": "cd server && npm install && npm install dotenv",
     "start-server": "cd server && node app.js",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
