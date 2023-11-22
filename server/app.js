@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 
 // ------------- middleware -------------
 // permit to do cors requests
-app.use(cors());
+app.use(cors({ origin: 'https://your-frontend-domain.com' }));
 
 app.use(bodyParser.json());
 
