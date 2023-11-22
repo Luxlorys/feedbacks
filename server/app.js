@@ -3,11 +3,16 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const feedbackRoute = require('./src/routes/feedbackRoutes');
+const path = require('path');
+
 require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+
+// ------------- middleware -------------
 // permit to do cors requests
 app.use(cors());
 
@@ -15,6 +20,9 @@ app.use(bodyParser.json());
 
 // feedback router
 app.use(feedbackRoute);
+
+app,use(express.static(path.join(__dirname, "dist")));
+
 
 // Connect to MongoDB
 main().then(() => {
