@@ -4,7 +4,7 @@ import { apiInterface } from "./apiInterface";
 export class FeedbackApi implements apiInterface {
     async get(): Promise<Feedback[]> {
         try {
-            const response = await fetch("http://localhost:3001/api/v1/get-feedbacks");
+            const response = await fetch("http://https://back-feedback-barista.onrender.com/api/v1/get-feedbacks");
 
             if (!response.ok) {
                 console.error(`GET request failed with status ${response.status}`);
@@ -23,7 +23,7 @@ export class FeedbackApi implements apiInterface {
     }
     async post(feedback: Feedback): Promise<void> {
         try {
-            const response = await fetch("http://localhost:3001/api/v1/send-feedback", {
+            const response = await fetch("http://https://back-feedback-barista.onrender.com/api/v1/send-feedback", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
