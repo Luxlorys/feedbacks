@@ -5,7 +5,7 @@ const cors = require('cors');
 const feedbackRoute = require('./src/routes/feedbackRoutes');
 const path = require('path');
 
-// require('dotenv').config();
+require('dotenv').config();
 
 
 const app = express();
