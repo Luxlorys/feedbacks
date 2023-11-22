@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "concurrently \"cd front && npm run dev\" \"cd back && node app.js\""
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && node app.js\""
   },
   "dependencies": {
     "concurrently": "^8.2.2"
