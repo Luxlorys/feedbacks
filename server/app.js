@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 // feedback router
 app.use(feedbackRoute);
 
-app,use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 
 // Connect to MongoDB
