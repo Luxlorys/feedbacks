@@ -69,7 +69,7 @@ export function FeedbackForm({ api }: FeedbackApiProps) {
         comment: comment,
       };
 
-      // await api.post(feedback);
+      await api.post(feedback);
 
       toast({
         title: 'Дякуємо за ваш відгук',

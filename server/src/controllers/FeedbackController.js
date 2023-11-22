@@ -1,27 +1,28 @@
-const Feedback = require("../models/Feedback");
+const FeedbackService = require('../services/feedbackService');
 
 const getAllFeedbacks = async (req, res) => {
     try {
-        const data = await Feedback.find({});
-        res.json(data);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({message: 'Interval Server Error'})
-    }
-};
-
-const saveFeedback = async (req, res) => {
-    try {
-        const data = await new Feedback(req.body);
-        const saveData = await data.save();
-        res.json(saveData)
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({message: 'Interval Server Error'})
+        const feedbacks = await FeedbackService.getAllFeedbacks();
+        if(!feedbacks || feedbacks.length === 0) {
+            res.status(404).json({message: 'No feedbacks found'})
+        }
+        res.json(feedbacks);
+    } catch (error) {
+        console.error('Interna Server Error', error);
+        throw error;
     }
 }
 
 
+const saveFeedback = async (req, res) => {
+    try {
+        const createdFeedback = await FeedbackService.saveFeedback(req.body);
+        res.json(createdFeedback);
+    } catch (error) {
+        console.error('Internal Server Error', error);
+        throw error;
+    }
+}
 
 
 module.exports = {
