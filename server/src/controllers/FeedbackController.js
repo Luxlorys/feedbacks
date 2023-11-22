@@ -8,7 +8,7 @@ const getAllFeedbacks = async (req, res) => {
         }
         res.json(feedbacks);
     } catch (error) {
-        console.error('Interna Server Error', error);
+        console.error('Internal Server Error', error);
         throw error;
     }
 }
