@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/show-list-of-all-feedbacks",
+    path: "show-list-of-all-feedbacks",
     element: <FeedbacksList api={api} />
   }
 ]);
